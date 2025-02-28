@@ -1,0 +1,63 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}{{ clinic.name }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">{{ clinic.name }}</h2>
+    <p><strong>📍 Қала:</strong> {{ clinic.city }}</p>
+    <p><strong>📌 Мекенжай:</strong> {{ clinic.address }}</p>
+    <p><strong>🕒 Жұмыс уақыты:</strong> {{ clinic.work_schedule }}</p>
+    <p><strong>⭐ Рейтинг:</strong> {{ clinic.rating }}/5</p>
+
+    {% if clinic.photo %}
+        <img src="{{ clinic.photo.url }}" class="img-fluid rounded mb-3" alt="Клиниканың фотосы">
+    {% endif %}
+
+    <h3 class="mt-4">👨‍⚕️ Клиникадағы дәрігерлер</h3>
+
+    <div id="doctorsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for doctor in doctors %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row justify-content-center">
+                {% endif %}
+
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                {% if doctor.photo %}
+                                    <img src="{{ doctor.photo.url }}" class="card-img-top" alt="{{ doctor.user.username }}">
+                                {% else %}
+                                    <img src="{% static 'img/default-doctor.png' %}" class="card-img-top" alt="Дәрігер">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ doctor.user.username }}</h5>
+                                    <p class="card-text"><strong>Мамандығы:</strong> {{ doctor.specialty }}</p>
+                                    <p class="card-text"><strong>Рейтинг:</strong> ⭐{{ doctor.rating|default:"Рейтинг жоқ" }}</p>
+                                    <a href="{% url 'doctor_schedule' doctor.id %}" class="btn btn-primary btn-sm">Жазылу</a>
+                                </div>
+                            </div>
+                        </div>
+
+                {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+                    </div>
+                </div>
+                {% endif %}
+            {% empty %}
+            <p class="text-center">Дәрігерлер табылмады</p>
+            {% endfor %}
+        </div>
+
+        <!-- Навигациялық көрсеткіштер -->
+        <button class="carousel-control-prev d-block" type="button" data-bs-target="#doctorsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Алдыңғы</span>
+        </button>
+        <button class="carousel-control-next d-block" type="button" data-bs-target="#doctorsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Келесі</span>
+        </button>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}Регистрация клиники{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Регистрация клиники</h2>
+    <form method="post" class="mx-auto" style="max-width: 500px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+    </form>
+</div>
+{% endblock %}

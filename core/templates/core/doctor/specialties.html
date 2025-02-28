@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}Мамандық таңдау{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Мамандықты таңдаңыз</h2>
+    <ul>
+        {% for specialty in specialties %}
+        <li><a href="{% url 'doctors_by_specialty' specialty.id %}">{{ specialty.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block title %}Сілтемені өңдеу{% endblock %}
+{% block content %}
+    <h2>Бейне қоңырау сілтемесін өңдеу</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Бейне қоңырауға сілтеме</label>
+            <label>
+                <input type="text" name="video_link" value="{{ slot.video_link }}" class="form-control">
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Сақтау</button>
+    </form>
+{% endblock %}

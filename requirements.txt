@@ -1,0 +1,12 @@
+Django==3.2
+djangorestframework==3.14.0
+djoser==2.1.0
+django-cors-headers==3.13.0
+drf-yasg==1.21.6
+gunicorn==20.1.0
+mysqlclient==2.1.1
+Pillow==9.4.0
+python-dotenv==1.0.0
+google-auth==2.22.0
+google-auth-oauthlib==0.7.1
+google-api-python-client==2.92.0

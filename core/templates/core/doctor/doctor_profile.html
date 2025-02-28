@@ -1,0 +1,90 @@
+{% extends "core/base.html" %}
+{% block title %}Дәрігердің профилі{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Дәрігердің профилі</h2>
+
+    <div class="row">
+        <!-- Фото және ақпарат -->
+        <div class="col-md-4 text-center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {% if doctor.photo %}
+                        <img src="{{ doctor.photo.url }}" class="img-fluid rounded-circle" alt="Фото" width="150">
+                    {% else %}
+                        <img src="/static/img/default-doctor.png" class="img-fluid rounded-circle" alt="Фото жоқ" width="150">
+                    {% endif %}
+                    <input type="file" name="photo" class="form-control mt-2">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Фотоны жаңарту</button>
+            </form>
+        </div>
+
+        <!-- Деректерді өңдеу формасы -->
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Аты-жөні:</label>
+                    <input type="text" name="username" class="form-control" value="{{ doctor.user.username }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Лицензия нөмірі:</label>
+                    <input type="text" name="license_number" class="form-control" value="{{ doctor.license_number }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Телефон:</label>
+                    <input type="text" name="phone" class="form-control" value="{{ doctor.phone }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Білімі:</label>
+                    <textarea name="education" class="form-control" rows="3">{{ doctor.education }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Өзгерістерді сақтау</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3 class="mt-4">Брондалған консультациялар</h3>
+
+    <form method="GET" class="mb-3">
+        <label><input type="checkbox" name="no_video" {% if filter_no_video %}checked{% endif %} onchange="this.form.submit()"> Сілтемесіз</label>
+        <label><input type="checkbox" name="no_summary" {% if filter_no_summary %}checked{% endif %} onchange="this.form.submit()"> Қорытындыларсыз</label>
+    </form>
+
+    <ul class="list-group">
+        {% for consultation in consultations %}
+        <li class="list-group-item">
+            <strong>Күні:</strong> {{ consultation.schedule.date }} <br>
+            <strong>Уақыты:</strong> {{ consultation.schedule.start_time }} <br>
+            <strong>Пациент:</strong> {{ consultation.patient.user.username }} <br>
+            <a href="{% url 'doctor_patient_profile' consultation.patient.id %}" class="btn btn-info btn-sm">Пациент профилі</a>
+
+            <strong>Сілтеме:</strong>
+            {% if consultation.video_link %}
+                <a href="{{ consultation.video_link }}" target="_blank">{{ consultation.video_link }}</a>
+            {% else %}
+                <a href="{% url 'add_video_link' consultation.schedule_id %}" class="btn btn-info btn-sm">Сілтеме қосу</a>
+            {% endif %}
+
+            <strong>Қорытынды:</strong>
+            {% if consultation.summary %}
+                {{ consultation.summary }}
+            {% else %}
+                <a href="{% url 'add_consultation_summary' consultation.schedule_id %}" class="btn btn-success btn-sm">Қорытынды қосу</a>
+            {% endif %}
+        </li>
+        {% empty %}
+        <p class="text-center">Жазбалар жоқ</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

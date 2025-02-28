@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Науқастың профилі{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Науқастың профилі</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                {% if patient.photo %}
+                    <img src="{{ patient.photo.url }}" class="avatar img-fluid rounded-circle" alt="Фото пациента" width="150">
+                {% else %}
+                    <img src="{% static 'img/default-user.png' %}" class="avatar img-fluid rounded-circle" alt="Нет фото" width="150">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" name="save_profile" class="btn btn-primary w-100">Сақтау</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>📂 Құжаттар</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ doc_form.as_p }}
+                <button type="submit" name="upload_document" class="btn btn-success">📎 Құжат жүктеу</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h5>📑 Жүктелген құжаттар:</h5>
+            <ul class="list-group">
+                {% for document in documents %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ document.file.url }}" target="_blank">{{ document.file.name }}</a>
+                        <span class="badge bg-secondary">{{ document.uploaded_at|date:"d.m.Y" }}</span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">Құжаттар жоқ.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

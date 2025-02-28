@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% block title %}Консультация қорытындысын қосу{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">📝 Консультация қорытындысын қосу</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Қорытынды:</label>
+            {{ summary_form.summary }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">📂 Құжаттарды тіркеу:</label>
+            {{ document_form.file }}
+        </div>
+        <button type="submit" class="btn btn-success">💾 Сақтау</button>
+    </form>
+
+    {% if consultation.documents.all %}
+    <hr>
+    <h3>📂 Жүктелген құжаттар</h3>
+    <ul>
+        {% for doc in consultation.documents.all %}
+            <li><a href="{{ doc.file.url }}" target="_blank">{{ doc.file.name }}</a> ({{ doc.uploaded_at|date:"d.m.Y" }})</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+{% block title %}Кеңес беру тарихы{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Кеңес беру тарихы</h2>
+
+    {% if consultations %}
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Күні</th>
+                    <th>Уақыт</th>
+                    <th>Дәрігер</th>
+                    <th>Қорытынды</th>
+                    <th>Бейне сілтеме</th>
+                    <th>Пікір қалдыру</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consultation in consultations %}
+                <tr>
+                    <td>{{ consultation.schedule.date }}</td>
+                    <td>{{ consultation.schedule.start_time }}</td>
+                    <td>
+                        <a href="{% url 'doctor_schedule' consultation.doctor.id %}">
+                            {{ consultation.doctor.user.username }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if consultation.summary %}
+                            {{ consultation.summary }}
+                        {% else %}
+                            <span class="text-danger">Қорытынды қосылмаған</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if consultation.video_link %}
+                            <a href="{{ consultation.video_link }}" target="_blank">📹 Өту</a>
+                        {% else %}
+                            <span class="text-danger">Сілтеме қосылмаған</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not consultation.review %}
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal{{ consultation.id }}">
+                                Пікір қалдыру
+                            </button>
+                        {% else %}
+                            ⭐ {{ consultation.review.rating }} - {{ consultation.review.comment|default:"Пікір қалдырылмаған" }}
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <!-- Модальное окно для отзыва -->
+                <div class="modal fade" id="reviewModal{{ consultation.id }}" tabindex="-1" aria-labelledby="reviewModalLabel{{ consultation.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" action="{% url 'add_review' consultation.id %}">
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Дәрігерге пікір қалдыру</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Бағалау (1-5):</label>
+                                        <select name="rating" class="form-control" required>
+                                            <option value="1">⭐ 1</option>
+                                            <option value="2">⭐⭐ 2</option>
+                                            <option value="3">⭐⭐⭐ 3</option>
+                                            <option value="4">⭐⭐⭐⭐ 4</option>
+                                            <option value="5">⭐⭐⭐⭐⭐ 5</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Пікір (міндетті емес):</label>
+                                        <textarea name="comment" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Жабу</button>
+                                    <button type="submit" class="btn btn-success">Жіберу</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Конец модального окна -->
+
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center mt-3">Консультациялар әлі жоқ.</p>
+    {% endif %}
+</div>
+{% endblock %}

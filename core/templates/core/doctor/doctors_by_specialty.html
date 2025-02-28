@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}{{ specialty.name }} мамандығы бойынша дәрігерлер{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center">{{ specialty.name }} мамандығы бойынша дәрігерлер</h2>
+
+    {% if doctors %}
+    <div id="doctorsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for doctor in doctors %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row justify-content-center">
+                {% endif %}
+
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                {% if doctor.photo %}
+                                    <img src="{{ doctor.photo.url }}" class="card-img-top" alt="{{ doctor.user.username }}">
+                                {% else %}
+                                    <img src="{% static 'img/default-doctor.png' %}" class="card-img-top" alt="Дәрігер">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ doctor.user.username }}</h5>
+                                    <p class="card-text"><strong>📌 Мамандығы:</strong> {{ doctor.specialty }}</p>
+                                    <p class="card-text"><strong>⭐ Рейтинг:</strong> {{ doctor.rating|default:"Рейтинг жоқ" }}</p>
+                                    <p class="card-text"><strong>⭐ Рейтинг:</strong> {{ doctor.rating|default:"Рейтинг жоқ" }}</p>
+                                    <a href="{% url 'doctor_schedule' doctor.id %}" class="btn btn-primary btn-sm">📅 Қабылдауға жазылу</a>
+                                </div>
+                            </div>
+                        </div>
+
+                {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+                    </div>
+                </div>
+                {% endif %}
+            {% empty %}
+            <p class="text-center">Дәрігерлер табылған жоқ.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Навигация көрсеткілері -->
+        <button class="carousel-control-prev d-block" type="button" data-bs-target="#doctorsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Алдыңғы</span>
+        </button>
+        <button class="carousel-control-next d-block" type="button" data-bs-target="#doctorsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Келесі</span>
+        </button>
+    </div>
+    {% else %}
+        <p class="text-muted text-center mt-4">Әзірге бұл мамандықта дәрігерлер жоқ.</p>
+    {% endif %}
+</div>
+{% endblock %}

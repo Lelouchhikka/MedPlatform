@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% block title %}Келесі айға кесте қосыңыз{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Келесі айға кесте жасаңыз</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="start_date">Басталу күні:</label>
+    <input type="date" name="start_date" required>
+
+    <label for="end_date">Аяқталу күні:</label>
+    <input type="date" name="end_date" required>
+
+    <label for="start_time">Жұмыс күнінің басталуы:</label>
+    <input type="time" name="start_time" required>
+
+    <label for="end_time">Жұмыс күнінің соңы:</label>
+    <input type="time" name="end_time" required>
+
+    <label for="duration">Консультацияның ұзақтығы (мин):</label>
+    <select name="duration">
+        <option value="30">30</option>
+        <option value="60">60</option>
+    </select>
+
+    <button type="submit">Кесте құру</button>
+</form>
+
+</div>
+{% endblock %}

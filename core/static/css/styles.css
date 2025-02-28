@@ -1,0 +1,25 @@
+ body {
+            font-family: 'Montserrat', sans-serif;
+
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .container {
+            margin-top: 20px;
+        }
+
+.avatar {
+    width: 100px; /* Размер аватарки */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%; /* Делаем круглой */
+    border: 2px solid #ddd; /* Тонкая граница */
+}

@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block title %}Дәрігерді қосу{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mt-4">Дәрігерді қосу</h2>
+    <form method="post" enctype="multipart/form-data" class="mx-auto mt-3" style="max-width: 600px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary w-100">Дәрігерді қосу</button>
+    </form>
+</div>
+{% endblock %}

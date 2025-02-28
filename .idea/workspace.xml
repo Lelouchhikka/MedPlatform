@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ffd0f554-01f7-4f44-b9ef-9735e2926dd2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/med.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/media/clinics/default-clinic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/media/doctors/default-doctor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/seeder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/signals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/static/img/default-clinic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/static/img/default-doctor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/static/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/auth/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/auth/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/auth/register_clinic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/appointment_success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/appointments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/consent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/consultation_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/doctor_schedule.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/patient_consultations.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/client/patient_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/add_doctor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/clinic_dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/clinic_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/clinic_doctors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/clinic_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/clinics.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/delete_doctor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/clinics/edit_doctor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/add_consultation_summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/add_video_link.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/consultation_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/create_schedule_next_month.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/create_training.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/doctor_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/doctors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/doctors_by_specialty.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/edit_doctor_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/edit_schedule.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/patient_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/specialties.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/trainings_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/doctor/view_schedule.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/templates/core/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2sH0PCI9ZylptGSSWoiaGfaH5XC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/projects/final_bot&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\jetbrains\\PyCharm 2024.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\projects\med\core\templates\core" />
+      <recent name="D:\MyFolders\projects\med\core\media\doctors" />
+      <recent name="D:\MyFolders\projects\med\core\media\clinics" />
+      <recent name="D:\MyFolders\projects\med\core\media" />
+      <recent name="D:\MyFolders\projects\med\core\static\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\projects\med\core\templates\core\doctor" />
+      <recent name="D:\MyFolders\projects\med\core\templates\core\client" />
+      <recent name="D:\MyFolders\projects\med\core\templates\core\clinics" />
+      <recent name="D:\MyFolders\projects\med\core\templates\core\auth" />
+      <recent name="D:\MyFolders\projects\med\core\templates\core" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="med" type="Python.DjangoServer" factoryName="Django server">
+      <module name="med" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffd0f554-01f7-4f44-b9ef-9735e2926dd2" name="Changes" comment="" />
+      <created>1738097168378</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738097168378</updated>
+      <workItem from="1738097169135" duration="3431000" />
+      <workItem from="1738209613226" duration="3452000" />
+      <workItem from="1738245570638" duration="518000" />
+      <workItem from="1738267095871" duration="7500000" />
+      <workItem from="1738274628424" duration="1300000" />
+      <workItem from="1738276182689" duration="1087000" />
+      <workItem from="1738304301256" duration="1334000" />
+      <workItem from="1738311525528" duration="4340000" />
+      <workItem from="1738385227844" duration="9381000" />
+      <workItem from="1738416040461" duration="2534000" />
+      <workItem from="1738418933828" duration="1594000" />
+      <workItem from="1738603180943" duration="3293000" />
+      <workItem from="1738611700900" duration="1917000" />
+      <workItem from="1738673462032" duration="1404000" />
+      <workItem from="1738683105793" duration="5656000" />
+      <workItem from="1738773073740" duration="3763000" />
+      <workItem from="1738849816150" duration="3136000" />
+      <workItem from="1738871443095" duration="172000" />
+      <workItem from="1738944967147" duration="8159000" />
+      <workItem from="1739298838708" duration="1135000" />
+      <workItem from="1739365561153" duration="4618000" />
+      <workItem from="1739601776232" duration="22000" />
+      <workItem from="1739897157097" duration="6803000" />
+      <workItem from="1740251886178" duration="2602000" />
+      <workItem from="1740655957579" duration="17000" />
+      <workItem from="1740657680978" duration="1301000" />
+      <workItem from="1740746608183" duration="4278000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

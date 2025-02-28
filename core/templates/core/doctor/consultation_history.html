@@ -1,0 +1,63 @@
+{% extends "core/base.html" %}
+{% block title %}Кеңес беру тарихы{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Кеңес беру тарихы</h2>
+
+    {% if consultations %}
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>📅 Күні</th>
+                    <th>🕒 Уақыты</th>
+                    <th>🧑‍⚕️ Науқас</th>
+                    <th>📄 Қорытынды</th>
+                    <th>📹 Бейне сілтеме</th>
+                    <th>📂 Құжаттар</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consultation in consultations %}
+                <tr>
+                    <td>{{ consultation.schedule.date }}</td>
+                    <td>{{ consultation.schedule.start_time }}</td>
+                    <td>
+                        <a href="{% url 'doctor_patient_profile' consultation.patient.id %}">
+                            {{ consultation.patient.user.username }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if consultation.summary %}
+                            {{ consultation.summary }}
+                        {% else %}
+                            <span class="text-danger">Қорытынды қосылмаған</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if consultation.video_link %}
+                            <a href="{{ consultation.video_link }}" target="_blank">📹 Өту</a>
+                        {% else %}
+                            <span class="text-danger">Сілтеме қосылмаған</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if consultation.documents.all %}
+                            <ul>
+                                {% for doc in consultation.documents.all %}
+                                    <li><a href="{{ doc.file.url }}" target="_blank">{{ doc.file.name }}</a> ({{ doc.uploaded_at|date:"d.m.Y" }})</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="text-muted">Құжаттар жоқ</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center mt-3">Консультациялар әлі жоқ.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% block title %}Пациенттің профилі{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Пациенттің профилі</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                {% if patient.photo %}
+                    <img src="{{ patient.photo.url }}" class="avatar" alt="Пациенттің фотосы">
+                {% else %}
+                    <img src="/static/img/default-user.png" class="avatar" alt="Фотосы жоқ">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4>{{ patient.user.username }}</h4>
+            <p><strong>ЖСН:</strong> {{ patient.iin }}</p>
+            <p><strong>Телефон:</strong> {{ patient.phone }}</p>
+            <p><strong>Салмағы:</strong> {{ patient.weight }} кг</p>
+            <p><strong>Бойы:</strong> {{ patient.height }} см</p>
+            <p><strong>Аллергиялар:</strong> {{ patient.allergies|default:"Көрсетілмеген" }}</p>
+            <p><strong>Созылмалы аурулар:</strong> {{ patient.chronic_diseases|default:"Көрсетілмеген" }}</p>
+
+            <h5>Пациенттің құжаттары</h5>
+            <ul>
+                {% for document in patient.documents.all %}
+                    <li><a href="{{ document.file.url }}" target="_blank">{{ document.file.name }}</a> ({{ document.uploaded_at|date:"d.m.Y" }})</li>
+                {% empty %}
+                    <li>Құжаттар жоқ.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

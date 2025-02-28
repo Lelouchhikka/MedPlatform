@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}Профильді өңдеу{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Профильді өңдеу</h2>
+    <form method="post" enctype="multipart/form-data" class="mx-auto" style="max-width: 400px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success w-100">💾 Сақтау</button>
+    </form>
+</div>
+{% endblock %}

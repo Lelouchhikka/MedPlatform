@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+{% block title %}Дәрігерге жазылу{% endblock %}
+{% block content %}
+    <h2 class="text-center">Дәрігерге жазылу</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Дәрігер</th>
+                <th>Күні</th>
+                <th>Уақыт</th>
+                <th>Әрекет</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for slot in available_slots %}
+            <tr>
+                <td>{{ slot.doctor.user.get_full_name }}</td>
+                <td>{{ slot.date }}</td>
+                <td>{{ slot.start_time }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="slot_id" value="{{ slot.id }}">
+                        <button type="submit" class="btn btn-primary">Жазылу</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center">Слоттар жоқ</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

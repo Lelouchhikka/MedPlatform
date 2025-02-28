@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+{% block title %}Оқыту конференциялары{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Оқыту конференциялары</h2>
+
+    <ul class="list-group">
+        {% for training in trainings %}
+        <li class="list-group-item">
+            <strong>{{ training.specialty.name }}</strong> <br>
+            📅 Күні: <strong>{{ training.date }}</strong> 🕒 Уақыты: <strong>{{ training.start_time }}</strong> <br>
+            🎤 Жүргізуші: <strong>{{ training.organizer.user.username }}</strong> <br>
+            🔬 Мамандығы: <strong>{{ training.organizer.specialty }}</strong> <br>
+            🏅 Тәжірибе: <strong>{{ training.organizer.experience_years }} жыл</strong> <br>
+            📝 Сипаттама: {{ training.description }}
+            <br><br>
+            {% if not training.conflict %}
+                {% if request.user.doctor in training.participants.all %}
+                    <span class="badge bg-success">✅ Сіз тіркелдіңіз</span>
+                    <a href="{{ training.video_link }}" target="_blank" class="btn btn-info btn-sm">🔗 Конференцияға өту</a>
+                {% else %}
+                    <a href="{% url 'join_training' training.id %}" class="btn btn-success btn-sm">Тіркелу</a>
+                {% endif %}
+            {% else %}
+                <button class="btn btn-secondary btn-sm" disabled>Уақыт сәйкес келмейді</button>
+            {% endif %}
+        </li>
+        {% empty %}
+        <p class="text-center">Қазіргі уақытта қолжетімді оқыту конференциялары жоқ.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

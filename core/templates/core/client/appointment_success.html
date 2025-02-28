@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+{% block title %}Жазба расталды{% endblock %}
+{% block content %}
+<div class="container text-center">
+    <h2>Сіз сәтті жазылдыңыз!</h2>
+    <p>Доктор: {{ consultation.doctor.user.username }}</p>
+    <p>Дата: {{ consultation.schedule.date }}</p>
+</div>
+{% endblock %}

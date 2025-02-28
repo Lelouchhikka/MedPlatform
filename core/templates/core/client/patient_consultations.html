@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% block title %}Менің кеңесім{% endblock %}
+{% block content %}
+<h2 class="text-center">Менің кеңесім</h2>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Күні</th>
+            <th>Дәрігер</th>
+            <th>Бейне қоңырау</th>
+            <th>Қорытынды</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consultation in consultations %}
+        <tr>
+            <td>{{ consultation.schedule.date }}</td>
+            <td>{{ consultation.doctor.user.username }}</td>
+            <td>
+                {% if consultation.video_link %}
+                    <a href="{{ consultation.video_link }}" target="_blank" class="btn btn-primary btn-sm">Перейти</a>
+                {% else %}
+                    <span class="text-muted">Қосылмаған</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if consultation.summary %}
+                    {{ consultation.summary }}
+                {% else %}
+                    <span class="text-muted">Деректер жоқ</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">Жазылған консультациялар жоқ</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

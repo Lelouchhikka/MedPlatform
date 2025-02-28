@@ -1,0 +1,106 @@
+{% extends "core/base.html" %}
+{% block title %}Менің кестем{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Менің кестем</h2>
+    <input type="hidden" id="doctor-id" value="{{ doctor.id }}">
+
+    <!-- 🔍 Күнді таңдау -->
+    <div class="d-flex justify-content-between">
+        <h4>Күнді таңдаңыз:</h4>
+        <a href="{% url 'create_schedule' %}" class="btn btn-success">➕ Кесте қосу</a>
+    </div>
+
+    <!-- 🔄 Күндерді батырма түрінде көрсету -->
+    <div class="date-picker d-flex flex-wrap mt-3">
+        {% for date in schedule_dates %}
+        <button class="btn btn-outline-primary m-1 date-btn"
+                onclick="loadDoctorTimes('{{ date|date:'Y-m-d' }}')"
+                data-date="{{ date|date:'Y-m-d' }}">
+            {{ date|date:"d F, Y" }}
+        </button>
+        {% endfor %}
+    </div>
+
+    <hr>
+    <h4>Қол жетімді уақыттар:</h4>
+    <p id="error-message" class="text-danger"></p>
+    <div id="times-container" class="d-flex flex-wrap"></div>
+</div>
+
+<!-- ✅ Дәрігердің кестесін жүктеу үшін JavaScript -->
+<script>
+function deleteSlot(slotId) {
+    if (confirm("Бұл слотты жоюға сенімдісіз бе?")) {
+        fetch(`/schedule/delete/${slotId}/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/json"
+            }
+        })
+        .then(data => {
+            alert(data.message || "Слот сәтті жойылды!");  // ✅ Сәтті жою туралы хабарлама
+            location.reload();
+        })
+        .catch(error => {
+            alert("Жою қатесі: " + error.message);  // ✅ Қате туралы хабарлау
+            console.error("Жою қатесі:", error);
+        });
+    }
+}
+
+function loadDoctorTimes(date) {
+    fetch(`/doctor/schedule/times/?date=${date}`)
+    .then(response => response.json())
+    .then(data => {
+        let container = document.getElementById("times-container");
+        let errorMessage = document.getElementById("error-message");
+
+        container.innerHTML = "";
+        errorMessage.innerText = "";
+
+        if (data.times && data.times.length > 0) {
+            data.times.forEach(slot => {
+                let slotDiv = document.createElement("div");
+                slotDiv.className = "time-slot btn m-1";
+                slotDiv.innerHTML = `<span>${slot.start_time}</span>`;
+
+                if (slot.is_booked) {
+                    slotDiv.classList.add("btn-warning");  // Брондалған слот
+                    slotDiv.innerHTML += `<span class="badge bg-danger">Брондалған</span>`;
+                } else {
+                    slotDiv.classList.add("btn-outline-success");
+                    slotDiv.innerHTML += `
+                        <button class="btn btn-danger btn-sm m-1" onclick="deleteSlot(${slot.id})">❌ Жою</button>
+                    `;
+                }
+
+                container.appendChild(slotDiv);
+            });
+        } else {
+            errorMessage.innerText = "Қол жетімді уақыттар жоқ.";
+        }
+    })
+    .catch(error => {
+        console.error("Деректерді жүктеу қатесі:", error);
+        document.getElementById("error-message").innerText = "Деректерді жүктеу қатесі.";
+    });
+}
+</script>
+
+<style>
+.date-btn {
+    min-width: 100px;
+    padding: 8px;
+    text-align: center;
+}
+.time-slot {
+    min-width: 120px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+{% endblock %}

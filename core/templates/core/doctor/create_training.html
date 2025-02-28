@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}Оқу қоңырауын жасаңыз{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Оқу қоңырауын жасаңыз</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100 mt-3">Жасау</button>
+    </form>
+</div>
+{% endblock %}

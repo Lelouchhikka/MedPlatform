@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% block title %}Клиниканың жеке кабинеті{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">{{ clinic.name }}</h2>
+    <p><strong>Мекенжайы:</strong> {{ clinic.address }}</p>
+    <p><strong>Телефон:</strong> {{ clinic.phone }}</p>
+
+    <h3>Дәрігерлер тізімі</h3>
+    <a href="{% url 'add_doctor' %}" class="btn btn-success">Дәрігер қосу</a>
+    <ul class="list-group mt-3">
+        {% for doctor in doctors %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ doctor.user.username }} - {{ doctor.specialty.name }}</span>
+            <div>
+                <a href="{% url 'edit_doctor' doctor.id %}" class="btn btn-warning btn-sm">Өңдеу</a>
+                <a href="{% url 'delete_doctor' doctor.id %}" class="btn btn-danger btn-sm">Жою</a>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">Дәрігерлер жоқ</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

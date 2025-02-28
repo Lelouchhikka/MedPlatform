@@ -1,0 +1,107 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Дәрігердің кестесі{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Дәрігердің кестесі</h2>
+
+    <div class="card p-3">
+        <div class="row">
+            <!-- Фото и информация о враче -->
+            <div class="col-md-3 text-center">
+                <p><strong>Дәрігердің суреті</strong></p>
+                {% if doctor.photo %}
+                    <img src="{{ doctor.photo.url }}" class="img-fluid rounded-circle" alt="Дәрігердің фотосы">
+                {% else %}
+                    <img src="{% static 'img/default-doctor.png' %}" class="img-fluid rounded-circle" alt="Дәрігердің фотосы">
+                {% endif %}
+                <p><strong>{{ doctor.user.username }}</strong></p>
+               <p><strong>Мамандығы:</strong>
+    {{ doctor.get_specialties }}
+</p>
+                <p><strong>Еңбек өтілі:</strong> {{ doctor.experience|default:"Көрсетілмеген" }} жыл</p>
+                <p><strong>Білімі:</strong> {{ doctor.education|default:"Көрсетілмеген" }}</p>
+                <p><strong>Клиника:</strong> {{ doctor.clinic.name }}</p>
+                <p><strong>Рейтинг:</strong> ⭐ {{ doctor.average_rating|default:"Рейтинг жоқ" }}</p>
+            </div>
+
+            <!-- Расписание врача -->
+            <div class="col-md-9">
+                <h5>Күнді таңдаңыз:</h5>
+                <div id="dates-container">
+                    {% for date in unique_dates %}
+                        <button class="btn btn-outline-primary m-1 date-btn" data-date="{{ date|date:'Y-m-d' }}">
+                            {{ date|date:"d M, Y" }}
+                        </button>
+                    {% endfor %}
+                </div>
+
+                <hr>
+                <h5>Қол жетімді сағат:</h5>
+                <div id="times-container">
+                    <p>Қол жетімді сағаттарды көру үшін күнді таңдаңыз.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Список отзывов -->
+    <div class="card p-3 mt-4">
+        <h4>Пікірлер</h4>
+        {% if reviews %}
+            <ul class="list-group">
+                {% for review in reviews %}
+                    <li class="list-group-item">
+                        <strong>{{ review.patient.user.username }}</strong> ⭐ {{ review.rating }}<br>
+                        {{ review.comment|default:"Пікір қалдырылмаған" }}
+                        <small class="text-muted d-block">({{ review.created_at|date:"d.m.Y" }})</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">Пікірлер жоқ.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const dateButtons = document.querySelectorAll(".date-btn");
+    const timesContainer = document.getElementById("times-container");
+
+    dateButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const selectedDate = this.getAttribute("data-date");
+
+            dateButtons.forEach(btn => btn.classList.remove("btn-primary"));
+            this.classList.add("btn-primary");
+
+            fetch(`/doctor/{{ doctor.id }}/schedule/times/?date=${selectedDate}`)
+                .then(response => response.json())
+                .then(data => {
+                    timesContainer.innerHTML = "";
+
+                    if (data.times.length > 0) {
+                        data.times.forEach(time => {
+                            let timeButton = document.createElement("a");
+                            timeButton.href = `/appointment/book/${time.id}/`;
+                            timeButton.classList.add("btn", "btn-outline-success", "m-1");
+                            timeButton.innerText = time.start_time;
+                            timesContainer.appendChild(timeButton);
+                        });
+                    } else {
+                        timesContainer.innerHTML = "<p class='text-danger'>Қол жетімді уақыт жоқ</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Қате:", error);
+                    timesContainer.innerHTML = "<p class='text-danger'>Деректерді жүктеу қатесі</p>";
+                });
+        });
+    });
+});
+</script>
+
+{% endblock %}

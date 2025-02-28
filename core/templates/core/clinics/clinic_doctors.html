@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% block title %}Клиника дәрігерлері{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">👨‍⚕️ Сіздің клиникаңыздың дәрігерлері</h2>
+
+    <ul class="list-group">
+        {% for doctor in doctors %}
+        <li class="list-group-item">
+            {{ doctor.user.username }} ({{ doctor.specialty.name }})
+        </li>
+        {% empty %}
+        <li class="list-group-item">Қосылған дәрігерлер жоқ.</li>
+        {% endfor %}
+
+</div>
+{% endblock %}
