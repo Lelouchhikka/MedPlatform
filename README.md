@@ -1,7 +1,7 @@
 ## 📥 Установка
 1. **Склонируйте репозиторий:**
    ```bash
-   git clone https://github.com/<ВАШ_ЛОГИН>/MedPlatforma.git
+   git clone https://github.com/Lelouchhikka/MedPlatforma.git
    cd MedPlatforma
    ```
 
